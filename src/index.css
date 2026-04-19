@@ -3,6 +3,17 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 
+
+@font-face {
+  font-family: 'Jersey15';
+  src: url('../public/fonts/Jersey15-Regular.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Tilt';
+  src: url('../public/fonts/TiltNeon.ttf') format('opentype');
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -30,14 +41,14 @@
     --chart-4: oklch(0.488 0.243 264.376);
     --chart-5: oklch(0.424 0.199 265.638);
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
+    --sidebar: #2C3E50;
     --sidebar-foreground: oklch(0.145 0 0);
     --sidebar-primary: oklch(0.205 0 0);
     --sidebar-primary-foreground: oklch(0.985 0 0);
     --sidebar-accent: oklch(0.97 0 0);
     --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --sidebar-border: #1E293B;
+    --sidebar-ring: #1E293B;
 }
 
 .dark {
@@ -114,6 +125,8 @@
     --radius-2xl: calc(var(--radius) * 1.8);
     --radius-3xl: calc(var(--radius) * 2.2);
     --radius-4xl: calc(var(--radius) * 2.6);
+    --font-jersey: "Jersey15";
+    --font-tilt: "Tilt";
 }
 
 @layer base {
@@ -127,3 +140,4 @@
     @apply font-sans;
     }
 }
+
