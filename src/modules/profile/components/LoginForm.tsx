@@ -18,11 +18,20 @@ import type { IUserLogin } from "../types/profileTypes";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "@/components/ui/spinner";
+import { zodResolver } from "@hookform/resolvers/zod";
+import z from "zod";
+
+
+const loginSchema = z.object({
+    email: z.string().email("Invalid email address").min(1, "Email is required"),
+    password: z.string().min(6, "Password must be at least 6 characters").max(100, "Password must be less than 100 characters"),
+});
+
 
 
 
 const LoginForm = () => {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({resolver: zodResolver(loginSchema)});
     const [loading, setLoading] = useState<boolean>(false)
     const navigate = useNavigate()
 

@@ -19,12 +19,17 @@ import { Spinner } from "@/components/ui/spinner";
 import supabase from "@/utils/superbase";
 import { useNavigate } from "react-router-dom";
 
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const authSchema = z.object({
+    email: z.string().email("Invalid email address").min(1, "Email is required"),
+    password: z.string().min(6, "Password must be at least 6 characters").max(100, "Password must be less than 100 characters"),
+});
+
 
 
 const AuthForm = () => {
-
-
-
     useEffect(() => {
         supabase.auth.getUser().then((response) => {
             const user = response.data.user
@@ -34,7 +39,9 @@ const AuthForm = () => {
         })
     }, [])
 
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+        resolver: zodResolver(authSchema),
+    });
     const [loading, setLoading] = useState<boolean>(false)
     const [email, setEmail] = useState<string | undefined>('anon')
     const navigate = useNavigate()
@@ -74,11 +81,12 @@ const AuthForm = () => {
                     <Field>
                         <FieldLabel className="font-tilt text-[#FCFAEE]" htmlFor="email">Email</FieldLabel>
                         <Input {...register("email")} className="font-tilt text-[#FCFAEE]" type="email" id="email" placeholder="Enter your email" />
-                        {/* <FieldError>Choose another username.</FieldError> */}
+                        {errors.email && <FieldError>{errors.email.message}</FieldError>}
                     </Field>
                     <Field>
                         <FieldLabel htmlFor="password" className="font-tilt text-[#FCFAEE]">Password</FieldLabel>
                         <Input id="password" type="password" className="font-tilt text-[#FCFAEE]" {...register("password")} autoComplete="off" placeholder="Enter your password" />
+                        {errors.password && <FieldError>{errors.password.message}</FieldError>}
                     </Field>
                 </FieldGroup>
             </FieldSet>

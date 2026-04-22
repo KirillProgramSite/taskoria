@@ -32,13 +32,14 @@ const MainPage = () => {
 
 
       <div className="grid grid-cols-3 gap-4">
-        <div className="col-span-2"></div>
+        <div className="col-span-2">График</div>
         <div className="mt-10">
           <TasksToday />
           <OverdueTasks />
+          ваваоы
         </div>
 
-        <div className="col-span-2">График</div>
+        
         <div></div>
       </div>
 

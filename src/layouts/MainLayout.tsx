@@ -54,13 +54,7 @@ export function AppSidebar({ currentPath, character, handleLogout }: { currentPa
   const navigate = useNavigate()
 
   return (
-    <>
-      {/* Trigger для мобильных */}
-      <div className="sm:hidden p-2 bg-zinc-900 flex justify-between items-center text-white">
-        <SidebarTrigger onClick={() => setOpen(!open)}>
-          <Menu size={24} />
-        </SidebarTrigger>
-      </div>
+    <div className="hidden sm:block">
 
       <Sidebar
         // drawer для мобилки
@@ -130,8 +124,27 @@ export function AppSidebar({ currentPath, character, handleLogout }: { currentPa
           </SidebarMenu>
         </SidebarFooter>
       </Sidebar>
-    </>
+    </div>
 
+  )
+}
+
+export function MobileBottomNav() {
+  const navigate = useNavigate()
+
+  return (
+    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-zinc-900 border-t border-zinc-800 flex justify-around items-center py-2">
+      {items.map((item) => (
+        <button
+          key={item.title}
+          onClick={() => navigate(item.url)}
+          className="flex flex-col items-center gap-1 text-xs text-zinc-300 active:scale-95 transition"
+        >
+          <item.icon size={20} />
+          <span>{item.title}</span>
+        </button>
+      ))}
+    </div>
   )
 }
 
@@ -169,11 +182,11 @@ const MainLayout = () => {
 
 
       <SidebarInset className="bg-transparent">
-      <main className="text-amber-50 mt-10 pr-10">
+      <main className="text-amber-50 mt-10 px-10 md:px-0 pr-20">
         <Outlet />
       </main>
       </SidebarInset>
-
+      <MobileBottomNav />
     </SidebarProvider>
 
 

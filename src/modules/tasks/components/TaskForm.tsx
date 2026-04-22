@@ -41,12 +41,23 @@ import {
 import { DiamondPlus } from "lucide-react"
 
 
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const taskSchema = z.object({
+    title: z.string().min(2, "Title must be at least 2 characters").max(100, "Title must be less than 100 characters"),
+    decs: z.string().min(2, "Description must be at least 2 characters").max(200, "Description must be less than 200 characters"),
+    dedline: z.string().optional(),
+    difficult: z.string().min(1, "Difficulty must be at least 1 character").max(100, "Difficulty must be less than 100 characters"),
+    hasDeadline: z.boolean().optional(),
+});
 
 interface TaskFormData {
     title: string
     decs: string
     dedline: string
     difficult: string
+    hasDeadline?: boolean
 }
 
 
@@ -55,7 +66,9 @@ const TaskForm = () => {
     const [date, setDate] = useState<Date>()
     const [open, setOpen] = useState<boolean>(false)
 
-    const { register, handleSubmit, reset, control, watch } = useForm();
+    const { register, handleSubmit, reset, control, watch, formState: { errors } } = useForm({
+        resolver: zodResolver(taskSchema),
+    });
     const { createTask, tasks } = useTasksStore()
     const hasDeadline = watch("hasDeadline")
 
@@ -74,7 +87,7 @@ const TaskForm = () => {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger><Button size="lg" className="font-tilt bg-[#F7374F]">Create Quest <DiamondPlus /></Button></DialogTrigger>
-            <DialogContent>
+            <DialogContent className="bg-[#1E293B] text-[#F8FAFC] font-tilt">
                 <form onSubmit={handleSubmit(submitAddTask)}>
                     <Field className="">
                         <FieldLegend>Create your quest!</FieldLegend>
@@ -88,6 +101,8 @@ const TaskForm = () => {
                                 placeholder="To do homework"
                                 {...register("title")}
                             />
+                            {errors.title && <FieldError>{errors.title.message}</FieldError>}
+                            
 
                             <FieldLabel htmlFor="desc-quest">
                                 Description your quest
@@ -97,6 +112,7 @@ const TaskForm = () => {
                                 placeholder="It's hard, but i can to do"
                                 {...register("decs")}
                             />
+                            {errors.decs && <FieldError>{errors.decs.message}</FieldError>}
 
                             {hasDeadline && (<>
                                 <FieldLabel htmlFor="dedline-quest">
@@ -168,7 +184,7 @@ const TaskForm = () => {
                                     />
                                 </Field>
                             </FieldGroup>
-                            <Button type="submit" >Create Quest!</Button>
+                            <Button className="bg-[#F7374F] hover:bg-[#b43544]" type="submit" onClick={() => console.log("submit")}>Create Quest!</Button>
                         </FieldGroup>
                     </Field>
                 </form>
