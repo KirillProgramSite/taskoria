@@ -3,6 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 import { OverdueTasks, TasksToday } from "@/modules/tasks"
 import { ProgressUser } from "@/modules/character"
+import LootBox from "@/modules/tasks/components/LootBox"
 
 
 
@@ -36,7 +37,7 @@ const MainPage = () => {
         <div className="mt-10">
           <TasksToday />
           <OverdueTasks />
-          ваваоы
+          <LootBox />
         </div>
 
         
