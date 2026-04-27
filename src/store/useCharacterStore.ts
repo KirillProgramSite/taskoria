@@ -3,6 +3,7 @@
 import { addExp, type ICharacter } from "@/modules/character";
 import { fetch_user_character } from "@/modules/character/services/characterApi";
 import { create } from "zustand";
+import { toast } from "sonner"
 
 interface CharacterStore {
     character: ICharacter;
@@ -29,6 +30,7 @@ export const useCharacterStore = create<CharacterStore>()((set, get) => ({
             const updatedCharacter: ICharacter = await addExp(addExpVal)
             if (updatedCharacter) {
                 set({ character: { ...updatedCharacter } })
+                toast.success("You earned " + addExpVal + " XP!")
             }
         } catch (error) {
             console.error("Произошла ошибка при добавлении уровня");

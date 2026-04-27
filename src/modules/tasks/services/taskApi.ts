@@ -3,6 +3,8 @@ import type { ITask } from "../types/task";
 
 
 
+
+
 export const fetch_tasks = async () => {
     const { data: { user } } = await supabase.auth.getUser();
 
@@ -40,7 +42,7 @@ export const completed_task = async (idTask: string) => {
     try {
         const { data, error } = await supabase
             .from('task')
-            .update({ completed: true })
+            .update({ completed: true, completed_at: new Date().toISOString() })
             .eq('id', idTask)
             .select()
 
@@ -61,4 +63,22 @@ export const delete_task = async (idTask: string) => {
     } catch (error) {
         console.error("Ошибка при удалении таски");
     }
+}
+
+export const weekly_tasks = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+
+    const lastWeekDate = new Date()
+    lastWeekDate.setDate(lastWeekDate.getDate() - 7)
+
+    const lastWeekISO = lastWeekDate.toISOString()
+
+    const { data, error } = await supabase
+        .from("task")
+        .select("completed_at")
+        .eq("user_id", user.id)
+        .eq("completed", true)
+        .gte("completed_at", lastWeekISO)
+
+    return { data, error }
 }

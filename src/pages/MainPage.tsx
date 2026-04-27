@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { OverdueTasks, TasksToday } from "@/modules/tasks"
 import { ProgressUser } from "@/modules/character"
 import LootBox from "@/modules/tasks/components/LootBox"
+import ChartTasks from "@/modules/tasks/components/ChartTasks"
 
 
 
@@ -33,11 +34,13 @@ const MainPage = () => {
 
 
       <div className="grid grid-cols-3 gap-4">
-        <div className="col-span-2">График</div>
+        <div className="col-span-2">
+          <ChartTasks />
+          <LootBox />
+        </div>
         <div className="mt-10">
           <TasksToday />
           <OverdueTasks />
-          <LootBox />
         </div>
 
         
