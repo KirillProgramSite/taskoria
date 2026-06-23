@@ -32,23 +32,32 @@ const LootBox = () => {
 
 
     return (
-        <div className="mt-5 flex justify-center items-center bg-[#1E293B] p-5 rounded-lg">
-            <img
-                className="w-80"
-                src={openedToday ? lootbox_open : lootbox_close}
-                alt="Loot Box"
-            />
-            <div className="ml-4">
-                <h1 className="font-jersey text-5xl mb-5">Daily Lootbox</h1>
-                <p className="font-tilt text-lg mb-8">Open your daily lootbox and claim a random reward: gold, XP boost, rare item, or special bonus. One chance every day.</p>
-                <Button
-                    disabled={!completedToday || openedToday}
-                    onClick={openLootBox}
-                >
-                    {openedToday ? "Lootbox Opened" : "Open Lootbox"}
-                </Button>
-            </div>
-        </div>
+        <div className="mt-5 flex flex-col lg:flex-row justify-center items-center bg-[#1E293B] p-5 rounded-lg gap-5">
+
+  <img
+    className="w-60 lg:w-80"
+    src={openedToday ? lootbox_open : lootbox_close}
+    alt="Loot Box"
+  />
+
+  <div className="text-center lg:text-left">
+    <h1 className="font-jersey text-4xl lg:text-5xl mb-5">
+      Daily Lootbox
+    </h1>
+
+    <p className="font-tilt text-base lg:text-lg mb-8 max-w-xl">
+      Open your daily lootbox and claim a random reward: gold, XP boost, rare item, or special bonus. One chance every day.
+    </p>
+
+    <Button
+      disabled={!completedToday || openedToday}
+      onClick={openLootBox}
+    >
+      {openedToday ? "Lootbox Opened" : "Open Lootbox"}
+    </Button>
+  </div>
+
+</div>
     )
 }
 

@@ -17,13 +17,27 @@ const MainPage = () => {
 
   return (
     <div className="relative">
-      <div className="flex justify-between">
-        <div className="flex items-center">
-          <h1 className="font-jersey text-5xl">Hello</h1>
-          <div className="">{character?.username ? (<span className="text-[#F7374F] font-jersey text-5xl ml-2">{character?.username}</span>) : (<Skeleton className="h-6 w-40 rounded-3xl ml-2" />)}</div>
-        </div>
-        <ProgressUser />
+      <div className="flex flex-col lg:flex-row lg:justify-between gap-4">
+
+    <div className="flex items-center">
+      <h1 className="font-jersey text-4xl lg:text-5xl">
+        Hello
+      </h1>
+
+      <div>
+        {character?.username ? (
+          <span className="text-[#F7374F] font-jersey text-4xl lg:text-5xl ml-2">
+            {character.username}
+          </span>
+        ) : (
+          <Skeleton className="h-6 w-40 rounded-3xl ml-2" />
+        )}
       </div>
+    </div>
+
+    <ProgressUser />
+
+  </div>
       {/* <div className="mt-20 flex  justify-between">
         <div className="flex-1">ff</div>
         <div className="flex-[2]">
@@ -33,7 +47,7 @@ const MainPage = () => {
       </div> */}
 
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-10">
         <div className="col-span-2">
           <ChartTasks />
           <LootBox />
