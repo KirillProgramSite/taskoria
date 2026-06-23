@@ -25,7 +25,7 @@ export const fetch_tasks = async () => {
 
 export const add_task = async (newTask: ITask) => {
     try {
-        const { data, error } = await supabase
+        const { data } = await supabase
             .from("task")
             .insert(newTask)
             .select()
@@ -40,7 +40,7 @@ export const add_task = async (newTask: ITask) => {
 export const completed_task = async (idTask: string) => {
 
     try {
-        const { data, error } = await supabase
+        const { data } = await supabase
             .from('task')
             .update({ completed: true, completed_at: new Date().toISOString() })
             .eq('id', idTask)

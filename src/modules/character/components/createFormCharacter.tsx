@@ -1,32 +1,29 @@
 import {
     Field,
-    FieldContent,
-    FieldDescription,
-    FieldError,
     FieldGroup,
     FieldLabel,
-    FieldLegend,
-    FieldSeparator,
     FieldSet,
-    FieldTitle,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Spinner } from "@/components/ui/spinner";
 import { post_character, upload_avatar } from "../services/characterApi";
 
 
+type CharacterForm = {
+  username: string;
+  avatar: FileList | null;
+}
 
-const CreateFormCharacter = ({ user }) => {
-    const { register, handleSubmit, reset, control } = useForm();
+
+const CreateFormCharacter = ({ user }: { user: any }) => {
+    const { register, handleSubmit, control } = useForm<CharacterForm>();
     const [loading, setLoading] = useState<boolean>(false)
-    const navigate = useNavigate()
 
-    const createCharacter = async (data) => {
-        const file = data.avatar[0]
+    const createCharacter = async (data: CharacterForm) => {
+        const file = data.avatar?.[0]
         const url = await upload_avatar(file, user.id)
         await post_character(user, data.username, url, user.email)
         // if(!loading){
@@ -48,7 +45,7 @@ const CreateFormCharacter = ({ user }) => {
                         <Controller
                             name="avatar"        // имя поля в форме
                             control={control}    // объект из useForm()
-                            defaultValue={[]}    // начальное значение
+                            defaultValue={null}    // начальное значение
                             rules={{ required: false }} // валидация
                             render={({ field }) => (
                                 <input

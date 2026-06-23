@@ -1,14 +1,10 @@
 import {
     Field,
-    FieldContent,
     FieldDescription,
-    FieldError,
     FieldGroup,
     FieldLabel,
     FieldLegend,
-    FieldSeparator,
     FieldSet,
-    FieldTitle,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form";
@@ -39,7 +35,7 @@ const LoginForm = () => {
         setLoading(true)
 
         try {
-            const profileData = await loginProfile(email, password);
+            await loginProfile(email, password);
         } catch (error) {
             console.error(error);
             alert('не удалось создать юзера')
@@ -47,6 +43,8 @@ const LoginForm = () => {
         finally {
             setLoading(false)
         }
+
+        reset()
     }
 
 

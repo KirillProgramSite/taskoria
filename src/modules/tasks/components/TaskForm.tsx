@@ -1,15 +1,11 @@
 import { Button } from "@/components/ui/button"
 import {
     Field,
-    FieldContent,
     FieldDescription,
     FieldError,
     FieldGroup,
     FieldLabel,
     FieldLegend,
-    FieldSeparator,
-    FieldSet,
-    FieldTitle,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import {
@@ -23,9 +19,7 @@ import {
 } from "@/components/ui/select"
 import { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
-import type { ITask } from "../types/task"
 import { useTasksStore } from "@/store/useTasksStore"
-import { nameToIdDiff } from "@/utils/nameToIdDiff"
 
 import { Checkbox } from "@/components/ui/checkbox"
 
@@ -33,9 +27,6 @@ import { Checkbox } from "@/components/ui/checkbox"
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { DiamondPlus } from "lucide-react"
@@ -63,7 +54,6 @@ interface TaskFormData {
 
 
 const TaskForm = () => {
-    const [date, setDate] = useState<Date>()
     const [open, setOpen] = useState<boolean>(false)
 
     const { register, handleSubmit, reset, control, watch, formState: { errors } } = useForm({

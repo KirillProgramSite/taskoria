@@ -6,3 +6,5 @@ const chartConfig = {
     color: "#2563eb",
   },
 } satisfies ChartConfig
+
+export default chartConfig

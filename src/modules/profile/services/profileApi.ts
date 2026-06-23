@@ -1,11 +1,9 @@
 import supabase from "@/utils/superbase"
-import type { IUserLogin } from "../types/profileTypes"
 import type { AuthResponse } from '@supabase/supabase-js'
-import { useNavigate } from "react-router-dom"
 
 
 export const loginProfile = async (email: string, password: string) => {
-    const { data, error }: AuthResponse = await supabase.auth.signUp(({
+    const { error }: AuthResponse = await supabase.auth.signUp(({
         email,
         password,
         options: {

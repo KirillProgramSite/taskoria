@@ -1,6 +1,6 @@
 import { TaskForm } from "@/modules/tasks"
 import { useTasksStore } from "@/store/useTasksStore"
-import { useEffect } from "react"
+
 import TaskCard from "@/modules/tasks/components/TaskCard"
 
 
@@ -15,7 +15,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 const TasksPage = () => {
   const { tasks } = useTasksStore()
   const tasks_completed_arr = tasks.filter((task) => task.completed === true)
-  const tasks_no_completed = tasks.filter((task) => task.completed === false)
 
 
 

@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button"
-import { fetch_user_character } from "@/modules/character/services/characterApi"
 import supabase from "@/utils/superbase"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Link, Outlet, useNavigate } from "react-router-dom"
 
 
@@ -18,27 +16,19 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
-  SidebarTrigger,
-  useSidebar,
 } from "@/components/ui/sidebar"
-import { Home, Menu, Settings, SidebarClose, SidebarOpen, Sword, Target, User } from "lucide-react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Home, Sword, Target } from "lucide-react"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { handleLogout } from "@/modules/profile"
-import { ProgressUser, type ICharacter } from "@/modules/character"
+import { type ICharacter } from "@/modules/character"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Field, FieldLabel } from "@/components/ui/field"
-import { Progress } from "@/components/ui/progress"
-import { getExpNeededForLevel } from "@/utils/expNeedForLevel"
 import { useCharacterStore } from "@/store/useCharacterStore"
 
 
@@ -49,8 +39,7 @@ const items = [
 ]
 
 
-export function AppSidebar({ currentPath, character, handleLogout }: { currentPath: string, character: ICharacter, handleLogout: void }) {
-  const { open, setOpen } = useSidebar()
+export function AppSidebar({ character, handleLogout }: { currentPath: string, character: ICharacter, handleLogout: (navigate: any) => void }) {
   const navigate = useNavigate()
 
   return (
@@ -58,8 +47,8 @@ export function AppSidebar({ currentPath, character, handleLogout }: { currentPa
 
       <Sidebar
         // drawer для мобилки
-        open={open}
-        onOpenChange={setOpen}
+        // open={open}
+        // onOpenChange={setOpen}
         className="sm:w-64 sm:flex sm:flex-col [&>div]:bg-zinc-900 [&>div]:text-white border-r border-zinc-800"
       >
         {/* Header */}

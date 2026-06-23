@@ -1,5 +1,4 @@
 import supabase from "@/utils/superbase";
-import type { ICharacter } from "../types/types"
 import { getExpNeededForLevel } from "@/utils/expNeedForLevel";
 
 

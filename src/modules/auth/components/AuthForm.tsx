@@ -1,14 +1,11 @@
 import {
     Field,
-    FieldContent,
     FieldDescription,
     FieldError,
     FieldGroup,
     FieldLabel,
     FieldLegend,
-    FieldSeparator,
     FieldSet,
-    FieldTitle,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form";
@@ -46,7 +43,7 @@ const AuthForm = () => {
     const [email, setEmail] = useState<string | undefined>('anon')
     const navigate = useNavigate()
 
-    const authUser = async (email, password) => {
+    const authUser = async (email:string, password:string) => {
         setLoading(true)
 
         try {

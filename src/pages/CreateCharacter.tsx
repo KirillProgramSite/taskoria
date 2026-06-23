@@ -1,7 +1,6 @@
 import { CreateFormCharacter } from "@/modules/character"
 import supabase from "@/utils/superbase"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 
 
 const CreateCharacter = () => {

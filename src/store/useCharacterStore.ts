@@ -6,14 +6,14 @@ import { create } from "zustand";
 import { toast } from "sonner"
 
 interface CharacterStore {
-    character: ICharacter;
+    character: ICharacter | null;
     fetchCharacter: () => void
     addExpCharacter: (addExp: number) => void
 }
 
 
-export const useCharacterStore = create<CharacterStore>()((set, get) => ({
-    character: {},
+export const useCharacterStore = create<CharacterStore>()((set) => ({
+    character: null,
 
     fetchCharacter: async () => {
         try {
